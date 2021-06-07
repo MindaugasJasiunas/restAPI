@@ -24,7 +24,7 @@ public class BaseEntity implements Serializable{
     @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "student_sequence")
     private Long id;
 
-    @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
+    @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false, unique = true)
     private UUID publicId= UUID.randomUUID();
 
     @Version
