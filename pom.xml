@@ -18,6 +18,7 @@
         <java.version>11</java.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
     </properties>
 
     <profiles>
@@ -68,6 +69,11 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency >
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-jdk8</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -87,7 +93,17 @@
                             <artifactId>lombok</artifactId>
                             <version>${lombok.version}</version>  //version from Spring Boot (managed by Spring Boot)
                         </path>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${org.mapstruct.version}</version>
+                        </path>
                     </annotationProcessorPaths>
+                    <compilerArgs>
+                        <compilerArg>
+                            -Amapstruct.defaultComponentModel=spring <!-- // for working with dependency injection. Alternative: add @Mapper(componentModel = "spring") to mapper interface -->
+                        </compilerArg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
