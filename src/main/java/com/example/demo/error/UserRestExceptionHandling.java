@@ -26,4 +26,13 @@ public class UserRestExceptionHandling {
         error.setTimeStamp(System.currentTimeMillis());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST); //Jackson will convert to JSON for return
     }
+
+    @ExceptionHandler
+    public ResponseEntity< UserErrorResponse> handleException(UserCreationException e) {
+        UserErrorResponse error = new UserErrorResponse();
+        error.setStatus(HttpStatus.BAD_REQUEST.value()); //400
+        error.setMessage(e.getMessage());
+        error.setTimeStamp(System.currentTimeMillis());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST); //Jackson will convert to JSON for return
+    }
 }

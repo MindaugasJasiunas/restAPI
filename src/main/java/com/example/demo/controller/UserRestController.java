@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.error.UserCreationException;
 import com.example.demo.user.UserDetailsRequestModel;
 import com.example.demo.user.UserDetailsResponseModel;
 import com.example.demo.user.UserEntity;
@@ -42,7 +43,11 @@ public class UserRestController {
     @PutMapping("/users/{publicId}")
     @ResponseStatus(HttpStatus.CREATED)  // 201 OR @ResponseStatus(HttpStatus.NO_CONTENT) //204 if not returning
     public UserDetailsResponseModel updateUser(@PathVariable("publicId") UUID publicId, @RequestBody UserDetailsRequestModel userDetailsRequestModel){
-        return userService.createOrUpdateUser(publicId, userDetailsRequestModel);
+        if(userDetailsRequestModel.getEmail()!=null){
+            return userService.createOrUpdateUser(publicId, userDetailsRequestModel);
+        }else{
+            throw new UserCreationException("Email is required.");
+        }
     }
 
     @PatchMapping("/users/{publicId}") //partial update
