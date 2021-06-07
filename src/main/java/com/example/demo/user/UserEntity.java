@@ -17,6 +17,7 @@ import java.util.UUID;
 public class UserEntity extends BaseEntity {
     private String firstName;
     private String lastName;
+    @Column(nullable = false, unique = true)
     private String email;
     private String encryptedPassword;
     private String emailVerificationToken;
