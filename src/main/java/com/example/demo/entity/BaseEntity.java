@@ -27,8 +27,12 @@ public class BaseEntity implements Serializable{
     @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false, unique = true)
     private UUID publicId= UUID.randomUUID();
 
-    @Version
-    private Long version;
+    // If there is a @Version field Spring Data will test that value to determine if the entity is new or not. If the @Version field is not a primitive and is null then the entity is considered new.
+    // SQL Error: 23505, SQLState: 23505
+    //Unique index or primary key violation: "PUBLIC.UK_FUQKA493LLH9K0IMXQ2NQKBY_INDEX_2 ON PUBLIC.USER(PUBLIC_ID) VALUES 5"; SQL statement:
+    //insert into user (created_at, last_modified_at, public_id, version, email, email_verification_status, email_verification_token, encrypted_password, first_name, last_name, id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [23505-200]
+//    @Version
+//    private Long version;
 
     @CreationTimestamp
     @Column(updatable = false)
