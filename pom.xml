@@ -69,10 +69,10 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency >
+        <dependency>
             <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-jdk8</artifactId>
-            <version>${org.mapstruct.version}</version>
+            <artifactId>mapstruct</artifactId>
+            <version>1.4.0.Final</version>
         </dependency>
     </dependencies>
 
