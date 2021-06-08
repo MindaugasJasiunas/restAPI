@@ -18,7 +18,7 @@
         <java.version>11</java.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
+        <org.mapstruct.version>1.4.0.Final</org.mapstruct.version>
     </properties>
 
     <profiles>
@@ -72,7 +72,7 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.4.0.Final</version>
+            <version>${org.mapstruct.version}</version>
         </dependency>
     </dependencies>
 
