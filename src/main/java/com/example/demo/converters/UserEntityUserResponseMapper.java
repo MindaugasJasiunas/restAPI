@@ -15,7 +15,6 @@ public interface UserEntityUserResponseMapper {
 
     @Mappings({
             @Mapping(target = "id", ignore = true), //UserEntity has id field that we need to ignore
-            @Mapping(target = "version", ignore = true),
             @Mapping(target = "createdAt", ignore = true),
             @Mapping(target = "lastModifiedAt", ignore = true),  
             @Mapping(target = "encryptedPassword", ignore = true),  
