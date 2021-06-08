@@ -22,25 +22,25 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping(value = "/users", produces = "application/json")
     @ResponseStatus(HttpStatus.OK) //200
     public Iterable<UserDetailsResponseModel> getUsers(){
         return userService.getUsers();
     }
 
-    @GetMapping("/users/{publicId}")
+    @GetMapping(value = "/users/{publicId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK) //200
     public UserDetailsResponseModel getUser(@PathVariable("publicId") UUID publicId){
         return userService.getUser(publicId);
     }
 
-    @PostMapping(value = "/users", consumes = "application/json")
+    @PostMapping(value = "/users", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)  // 201
     public UserDetailsResponseModel createUser(@RequestBody UserDetailsRequestModel userDetailsRequestModel){
         return userService.createOrUpdateUser(null, userDetailsRequestModel);
     }
 
-    @PutMapping("/users/{publicId}")
+    @PutMapping(value = "/users/{publicId}", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)  // 201 OR @ResponseStatus(HttpStatus.NO_CONTENT) //204 if not returning
     public UserDetailsResponseModel updateUser(@PathVariable("publicId") UUID publicId, @RequestBody UserDetailsRequestModel userDetailsRequestModel){
         if(userDetailsRequestModel.getEmail()!=null){
@@ -50,7 +50,7 @@ public class UserRestController {
         }
     }
 
-    @PatchMapping("/users/{publicId}") //partial update
+    @PatchMapping(value = "/users/{publicId}", consumes = "application/json", produces = "application/json") //partial update
     @ResponseStatus(HttpStatus.CREATED)  // 201
     public UserDetailsResponseModel partialUpdateUser(@PathVariable("publicId") UUID publicId, @RequestBody UserDetailsRequestModel userDetailsRequestModel){
         return userService.partialUpdateUser(publicId, userDetailsRequestModel);
