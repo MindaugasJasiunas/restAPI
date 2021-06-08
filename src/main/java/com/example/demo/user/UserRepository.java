@@ -12,7 +12,7 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
 
     @Transactional //(service method needs @Transactional too)
     @Modifying //modifying query
-    Optional<UserEntity> deleteUserEntityByPublicId(UUID publicId);
+    void deleteUserEntityByPublicId(UUID publicId);
 
     boolean existsByEmail(String email);
 
