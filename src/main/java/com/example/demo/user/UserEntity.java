@@ -13,7 +13,7 @@ import java.util.UUID;
 @Data
 
 @Entity(name = "User")
-@Table(name = "user")
+@Table(name = "user_entity")
 public class UserEntity extends BaseEntity {
     private String firstName;
     private String lastName;
