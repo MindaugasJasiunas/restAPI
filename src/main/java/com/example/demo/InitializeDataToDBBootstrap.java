@@ -8,6 +8,7 @@ import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -18,6 +19,8 @@ import java.util.Optional;
 public class InitializeDataToDBBootstrap implements CommandLineRunner {
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
@@ -28,7 +31,7 @@ public class InitializeDataToDBBootstrap implements CommandLineRunner {
         UserEntity userEntity=new UserEntity();
         userEntity.setFirstName("John");
         userEntity.setLastName("Doe");
-        userEntity.setEncryptedPassword("encryptedPassword");
+        userEntity.setEncryptedPassword(passwordEncoder.encode("encryptedPassword"));
         userEntity.setEmail("john.doe@example.com");
         userEntity.setEmailVerificationStatus(true);
         userEntity.setEmailVerificationToken("ABCDEFG");
@@ -38,7 +41,7 @@ public class InitializeDataToDBBootstrap implements CommandLineRunner {
         UserEntity userEntity2=new UserEntity();
         userEntity2.setFirstName("Jane");
         userEntity2.setLastName("Doe");
-        userEntity2.setEncryptedPassword("password123");
+        userEntity2.setEncryptedPassword(passwordEncoder.encode("password123"));
         userEntity2.setEmail("jane.doe@@example.com");
         userEntity2.setEmailVerificationStatus(true);
         userEntity2.setEmailVerificationToken("QWERTY");
@@ -48,7 +51,7 @@ public class InitializeDataToDBBootstrap implements CommandLineRunner {
         UserEntity userEntity3=new UserEntity();
         userEntity3.setFirstName("Oscar");
         userEntity3.setLastName("Dean");
-        userEntity3.setEncryptedPassword("encryptedPasswordCantBeSeen");
+        userEntity3.setEncryptedPassword(passwordEncoder.encode("encryptedPasswordCantBeSeen"));
         userEntity3.setEmail("oscar.dean@example.com");
         userEntity3.setEmailVerificationStatus(true);
         userEntity3.setEmailVerificationToken("UJNMKJH");

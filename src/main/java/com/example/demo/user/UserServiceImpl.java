@@ -8,9 +8,13 @@ import com.example.demo.error.UserEmailDuplicateException;
 import com.example.demo.error.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Service
@@ -86,4 +90,9 @@ public class UserServiceImpl implements UserService{
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        UserEntity userFromDB= userRepository.findUserEntityByEmail(email).get();
+        return new User(userFromDB.getEmail(), userFromDB.getEncryptedPassword(), new ArrayList<>());  // empty list for authorities
+    }
 }
