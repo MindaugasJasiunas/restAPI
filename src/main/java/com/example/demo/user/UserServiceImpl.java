@@ -1,11 +1,11 @@
 package com.example.demo.user;
 
-import com.example.demo.converters.UserDetailsRequestResponseMapper;
 import com.example.demo.converters.UserEntityUserRequestMapper;
 import com.example.demo.converters.UserEntityUserResponseMapper;
 import com.example.demo.error.UserCreationException;
-import com.example.demo.error.UserEmailDuplicateException;
 import com.example.demo.error.UserNotFoundException;
+import com.example.demo.model.UserDetailsRequestModel;
+import com.example.demo.model.UserDetailsResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.User;

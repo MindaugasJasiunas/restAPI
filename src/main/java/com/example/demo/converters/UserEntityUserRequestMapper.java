@@ -1,7 +1,6 @@
 package com.example.demo.converters;
 
-import com.example.demo.user.UserDetailsRequestModel;
-import com.example.demo.user.UserDetailsResponseModel;
+import com.example.demo.model.UserDetailsRequestModel;
 import com.example.demo.user.UserEntity;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
