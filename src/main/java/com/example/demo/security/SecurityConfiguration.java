@@ -1,5 +1,6 @@
 package com.example.demo.security;
 
+import com.example.demo.filter.JwtRequestFilter;
 import com.example.demo.user.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,17 +10,21 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final JwtRequestFilter jwtRequestFilter;
 
-    public SecurityConfiguration(UserService userService, PasswordEncoder passwordEncoder) {
+    public SecurityConfiguration(UserService userService, PasswordEncoder passwordEncoder, JwtRequestFilter jwtRequestFilter) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.jwtRequestFilter = jwtRequestFilter;
     }
 
     @Override
@@ -32,7 +37,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/authenticate").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .httpBasic();
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Spring Security, dont manage or create sessions (REST API)
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // filter that works for each request and sets up security context each time
 
         // Disable CSRF if service used by non-browser clients.
 
