@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.model.UserDetailsRequestModel;
+import com.example.demo.model.UserDetailsResponseModel;
 import com.example.demo.user.UserEntity;
 import org.springframework.security.core.userdetails.User;
 
@@ -65,6 +66,35 @@ public class TestUtilities {
         model.setFirstName("John");
         model.setLastName("Doe");
         return model;
+    }
+
+    public static UserDetailsResponseModel generateUserDetailsResponseModel(){
+        UserDetailsResponseModel model=new UserDetailsResponseModel();
+        model.setPublicId(UUID.randomUUID());
+        model.setEmail("john.doe@example.com");
+        model.setFirstName("John");
+        model.setLastName("Doe");
+        return model;
+    }
+
+    public static Iterable<UserDetailsResponseModel> generateUserDetailsResponseModelsList(){
+        List<UserDetailsResponseModel> userDetailsResponseModels= new ArrayList<>();
+
+        UserDetailsResponseModel model=new UserDetailsResponseModel();
+        model.setPublicId(UUID.randomUUID());
+        model.setEmail("john.doe@example.com");
+        model.setFirstName("John");
+        model.setLastName("Doe");
+        userDetailsResponseModels.add(model);
+
+        UserDetailsResponseModel model2=new UserDetailsResponseModel();
+        model2.setPublicId(UUID.randomUUID());
+        model2.setEmail("jane.does@example.com");
+        model2.setFirstName("Jane");
+        model2.setLastName("Does");
+        userDetailsResponseModels.add(model2);
+
+        return userDetailsResponseModels;
     }
 
 }
