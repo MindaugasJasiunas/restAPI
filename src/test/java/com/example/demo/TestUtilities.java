@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.model.UserDetailsRequestModel;
 import com.example.demo.user.UserEntity;
 import org.springframework.security.core.userdetails.User;
 
@@ -55,6 +56,15 @@ public class TestUtilities {
         userEntities.add(userEntity2);
 
         return userEntities;
+    }
+
+    public static UserDetailsRequestModel generateUserDetailsRequestModel(){
+        UserDetailsRequestModel model=new UserDetailsRequestModel();
+        model.setEmail("john.doe@example.com");
+        model.setPassword("encryptedPassword");
+        model.setFirstName("John");
+        model.setLastName("Doe");
+        return model;
     }
 
 }

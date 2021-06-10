@@ -101,11 +101,7 @@ class UserServiceImplIT {
     @DisplayName("Create new user")
     @Test
     void createOrUpdateUser_create() {  // createOrUpdateUser_create_EmailAlreadyExists catch exception
-        UserDetailsRequestModel model=new UserDetailsRequestModel();
-        model.setEmail("john.doe@example.com");
-        model.setPassword("encryptedPassword");
-        model.setFirstName("John");
-        model.setLastName("Doe");
+        UserDetailsRequestModel model= TestUtilities.generateUserDetailsRequestModel();
 
         UserEntity userEntity1= TestUtilities.generateUserEntity();
 
@@ -141,11 +137,7 @@ class UserServiceImplIT {
     @DisplayName("Create user - email already exists UserCreationException expected")
     @Test
     void createOrUpdateUser_create_EmailAlreadyExistsException() {
-        UserDetailsRequestModel model=new UserDetailsRequestModel();
-        model.setEmail("john.doe@example.com");
-        model.setPassword("encryptedPassword");
-        model.setFirstName("John");
-        model.setLastName("Doe");
+        UserDetailsRequestModel model=TestUtilities.generateUserDetailsRequestModel();
 
         UserEntity userEntity1= TestUtilities.generateUserEntity();
 
@@ -175,11 +167,7 @@ class UserServiceImplIT {
     @DisplayName("Update user")
     @Test
     void createOrUpdateUser_update() {
-        UserDetailsRequestModel model=new UserDetailsRequestModel();
-        model.setEmail("john.doe@exampleUP.com");
-        model.setPassword("encryptedPasswordUP");
-        model.setFirstName("JohnUP");
-        model.setLastName("DoeUP");
+        UserDetailsRequestModel model=TestUtilities.generateUserDetailsRequestModel();
 
         UserEntity userEntity1= TestUtilities.generateUserEntity();
 
@@ -213,11 +201,7 @@ class UserServiceImplIT {
     @DisplayName("Partial update user")
     @Test
     void partialUpdateUser() {
-        UserDetailsRequestModel model=new UserDetailsRequestModel();
-        model.setEmail("john.doe@example.com");
-        model.setPassword("encryptedPassword");
-        model.setFirstName("John");
-        model.setLastName("Doe");
+        UserDetailsRequestModel model=TestUtilities.generateUserDetailsRequestModel();
 
         UserEntity userEntity= TestUtilities.generateUserEntity();
 
@@ -242,11 +226,7 @@ class UserServiceImplIT {
     @DisplayName("Partial update non existent user. Expecting UserNotFoundException")
     @Test
     void partialUpdateUser_userDoesntExist() { // + throws
-        UserDetailsRequestModel model = new UserDetailsRequestModel();
-        model.setEmail("john.doe@example.com");
-        model.setPassword("encryptedPassword");
-        model.setFirstName("John");
-        model.setLastName("Doe");
+        UserDetailsRequestModel model = TestUtilities.generateUserDetailsRequestModel();
 
         UserEntity userEntity = TestUtilities.generateUserEntity();
 
