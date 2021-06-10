@@ -45,7 +45,7 @@ In return we get JSON response with generated JWT token
     "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImV4cCI6MTYyMzM0NDY3OSwiaWF0IjoxNjIzMzA4Njc5fQ.K0F9vsNSvzd5uqOf6Y7ZvU54WUBZL5GNQ6wPVvU5S1E"
 }
 ```
-Providing this token in *Authorization* header with `Bearer ` keyword used by default by Spring Security, we can access `POST`, `PUT`, `PATCH`, `DELETE`  HTTP methods for */users* endpoint.
+Providing this token in *Authorization* header with `Bearer ` keyword used by default by Spring Security, we can access `POST`, `PUT`, `PATCH`, `DELETE`  HTTP methods for '*/users*' endpoints.
 ```
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImV4cCI6MTYyMzM0NDY3OSwiaWF0IjoxNjIzMzA4Njc5fQ.K0F9vsNSvzd5uqOf6Y7ZvU54WUBZL5GNQ6wPVvU5S1E
 ```
