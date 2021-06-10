@@ -89,10 +89,22 @@ public class UserServiceImpl implements UserService{
         userRepository.deleteUserEntityByPublicId(publicId);
     }
 
+    //utility method for HTTP PUT
+    public boolean userExistsByUUID(UUID uuid){
+        if(userRepository.findUserEntityByPublicId(uuid).isPresent()){
+            return true;
+        }
+        return false;
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserEntity userFromDB= userRepository.findUserEntityByEmail(email).get();
-        return new User(userFromDB.getEmail(), userFromDB.getEncryptedPassword(), new ArrayList<>());  // empty list for authorities
+        if(userRepository.findUserEntityByEmail(email).isPresent()){
+            UserEntity userFromDB= userRepository.findUserEntityByEmail(email).get();
+            return new User(userFromDB.getEmail(), userFromDB.getEncryptedPassword(), new ArrayList<>());  // empty list for authorities
+        }else {
+            throw new UsernameNotFoundException("Username with email "+email+" not found!");
+        }
     }
 }

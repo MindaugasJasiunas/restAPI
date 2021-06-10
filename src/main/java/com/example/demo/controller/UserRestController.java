@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.error.UserCreationException;
+import com.example.demo.error.UserNotFoundException;
 import com.example.demo.model.UserDetailsRequestModel;
 import com.example.demo.model.UserDetailsResponseModel;
 import com.example.demo.user.UserService;
@@ -8,6 +9,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
@@ -33,13 +35,16 @@ public class UserRestController {
 
     @PostMapping(value = "/users", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)  // 201
-    public UserDetailsResponseModel createUser(@RequestBody UserDetailsRequestModel userDetailsRequestModel){
+    public UserDetailsResponseModel createUser(@RequestBody @Valid UserDetailsRequestModel userDetailsRequestModel){
         return userService.createOrUpdateUser(null, userDetailsRequestModel);
     }
 
     @PutMapping(value = "/users/{publicId}", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)  // 201 OR @ResponseStatus(HttpStatus.NO_CONTENT) //204 if not returning
-    public UserDetailsResponseModel updateUser(@PathVariable("publicId") UUID publicId, @RequestBody UserDetailsRequestModel userDetailsRequestModel){
+    public UserDetailsResponseModel updateUser(@PathVariable("publicId") UUID publicId, @RequestBody @Valid UserDetailsRequestModel userDetailsRequestModel){
+        if(!userService.userExistsByUUID(publicId)){
+            throw new UserCreationException("User with public Id "+publicId+" doesn't exist.");
+        }
         if(userDetailsRequestModel.getEmail()!=null){
             return userService.createOrUpdateUser(publicId, userDetailsRequestModel);
         }else{
@@ -49,7 +54,7 @@ public class UserRestController {
 
     @PatchMapping(value = "/users/{publicId}", consumes = "application/json", produces = "application/json") //partial update
     @ResponseStatus(HttpStatus.CREATED)  // 201
-    public UserDetailsResponseModel partialUpdateUser(@PathVariable("publicId") UUID publicId, @RequestBody UserDetailsRequestModel userDetailsRequestModel){
+    public UserDetailsResponseModel partialUpdateUser(@PathVariable("publicId") UUID publicId, @RequestBody @Valid UserDetailsRequestModel userDetailsRequestModel){
         return userService.partialUpdateUser(publicId, userDetailsRequestModel);
     }
 
@@ -60,6 +65,7 @@ public class UserRestController {
             userService.deleteUser(publicId);
         }catch(EmptyResultDataAccessException e){
             // prevent error if ID doesn't exist
+            throw new UserNotFoundException("User with public id " +publicId+" doesn't exist.");
         }
     }
 }

@@ -12,4 +12,5 @@ public interface UserService extends UserDetailsService {
     Iterable<UserDetailsResponseModel> getUsers();
     UserDetailsResponseModel getUser(UUID publicId);
     void deleteUser(UUID publicId);
+    public boolean userExistsByUUID(UUID uuid);
 }
