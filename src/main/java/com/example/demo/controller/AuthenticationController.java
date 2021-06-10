@@ -30,7 +30,7 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody @Valid AuthenticationRequestModel request) throws Exception{
+    public /*ResponseEntity<*/AuthenticationResponseModel/*>*/ createAuthenticationToken(@RequestBody @Valid AuthenticationRequestModel request) throws Exception{
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         }catch (BadCredentialsException e){
@@ -42,6 +42,7 @@ public class AuthenticationController {
 
         //return JWT as JSON
         AuthenticationResponseModel response= new AuthenticationResponseModel(jwt);
-        return ResponseEntity.ok(response);
+//        return ResponseEntity.ok(response);
+        return response;
     }
 }
