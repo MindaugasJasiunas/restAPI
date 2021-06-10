@@ -52,6 +52,8 @@ public class UserServiceImpl implements UserService{
                 userEntity.setId(user.getId());
 
                 userEntity.setPublicId(publicId);
+
+                userEntity.setEmailVerificationStatus(user.isEmailVerificationStatus());
             }
         }
         try{
