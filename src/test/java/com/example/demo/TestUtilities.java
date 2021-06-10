@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.model.AuthenticationRequestModel;
 import com.example.demo.model.UserDetailsRequestModel;
 import com.example.demo.model.UserDetailsResponseModel;
 import com.example.demo.user.UserEntity;
@@ -95,6 +96,14 @@ public class TestUtilities {
         userDetailsResponseModels.add(model2);
 
         return userDetailsResponseModels;
+    }
+
+
+    public static AuthenticationRequestModel generateAuthenticationRequestModel(){
+        AuthenticationRequestModel model=new AuthenticationRequestModel();
+        model.setEmail("john.doe@example.com");
+        model.setPassword("encryptedPassword");
+        return model;
     }
 
 }
