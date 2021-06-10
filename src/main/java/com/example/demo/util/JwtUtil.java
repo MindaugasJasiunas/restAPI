@@ -3,6 +3,8 @@ package com.example.demo.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +13,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+@PropertySource("classpath:jwtToken.properties")
 @Component
 public class JwtUtil {
-    private String SECRET_KEY= "secretSecretSecretSecretSecret";
+    private final String SECRET_KEY;
+    private final int EXPIRATION;
+
+    public JwtUtil(@Value("${jwt.secret.key}") String SECRET_KEY, @Value("${jwt.token.expiration}") int EXPIRATION) {
+        this.SECRET_KEY = SECRET_KEY;
+        this.EXPIRATION = EXPIRATION;
+    }
 
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
@@ -47,7 +56,7 @@ public class JwtUtil {
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*10)) // 10 hour
+                .setExpiration(new Date(System.currentTimeMillis()+EXPIRATION)) // 10 hours
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
