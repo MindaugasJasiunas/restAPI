@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class UserDetailsResponseModel {  // Response class to return JSON as response
     private UUID publicId;
-    public String firstName;
-    public String lastName;
+    private String firstName;
+    private String lastName;
     private String email;
 }
