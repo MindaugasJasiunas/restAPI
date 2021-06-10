@@ -96,6 +96,14 @@
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
         </dependency>
+
+
+        <!-- Error:Kotlin: Module was compiled with an incompatible version of Kotlin. The binary version of its metadata is 1.5.1, expected version is 1.1.16. -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-gradle-plugin</artifactId>
+            <version>1.5.10</version>
+        </dependency>
     </dependencies>
 
     <build>
