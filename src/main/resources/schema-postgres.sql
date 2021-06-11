@@ -1,4 +1,4 @@
-CREATE SEQUENCE student_sequence START 1;
+CREATE SEQUENCE userentity_sequence START 1;
 
 CREATE TABLE IF NOT EXISTS user_entity (
    id SERIAL PRIMARY KEY,

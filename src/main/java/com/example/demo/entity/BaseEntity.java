@@ -20,8 +20,8 @@ public class BaseEntity implements Serializable{
     private static final long serialVersionUID=1L;
 
     @Id
-    @SequenceGenerator( name = "student_sequence", sequenceName = "student_sequence", allocationSize = 1)
-    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "student_sequence")
+    @SequenceGenerator( name = "userentity_sequence", sequenceName = "userentity_sequence", allocationSize = 1)
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "userentity_sequence")
     private Long id;
 
     @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false, unique = true)
