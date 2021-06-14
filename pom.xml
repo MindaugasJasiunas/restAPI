@@ -141,9 +141,9 @@
                 <configuration>
                     <annotationProcessorPaths>
                         <path>
-                            <groupId>org.projectlombok</groupId>  //must be FIRST (if adding any additional)
+                            <groupId>org.projectlombok</groupId>  <!-- must be FIRST (if adding any additional)-->
                             <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>  //version from Spring Boot (managed by Spring Boot)
+                            <version>${lombok.version}</version>  <!-- version from Spring Boot (managed by Spring Boot)-->
                         </path>
                         <path>
                             <groupId>org.mapstruct</groupId>
