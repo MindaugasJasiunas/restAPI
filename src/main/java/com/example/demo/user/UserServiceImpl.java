@@ -57,6 +57,12 @@ public class UserServiceImpl implements UserService{
             }
         }
         try{
+            if(userEntity.getEmail()==null){
+                throw new UserCreationException("User email field is empty");
+            }
+            if(userEntity.getEncryptedPassword()==null){
+                throw new UserCreationException("User password field is empty");
+            }
             UserEntity userSaved= userRepository.save(userEntity);
             return UserEntityUserResponseMapper.INSTANCE.userEntityToUserDetailsResponseModel(userSaved);
         } catch (DataIntegrityViolationException emailExistsException) {
