@@ -1,9 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.documentation.SwaggerConfiguration;
 import com.example.demo.model.AuthenticationRequestModel;
 import com.example.demo.model.AuthenticationResponseModel;
 import com.example.demo.user.UserService;
 import com.example.demo.util.JwtUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+@Api(tags = { SwaggerConfiguration.TAG_AUTH_CONTROLLER_DESCRIPTION })
 @RestController
 public class AuthenticationController {
     private AuthenticationManager authenticationManager;
@@ -29,8 +33,9 @@ public class AuthenticationController {
         this.jwtUtil = jwtUtil;
     }
 
+    @ApiOperation(value="Authenticate user to get JWT", notes="This endpoint is used to authenticate by user email & password. In return JSON Web Token is sent. This token is used to manipulate users(POST, PUT, PATCH, DELETE endpoints).")
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public /*ResponseEntity<*/AuthenticationResponseModel/*>*/ createAuthenticationToken(@RequestBody @Valid AuthenticationRequestModel request) throws Exception{
+    public AuthenticationResponseModel createAuthenticationToken(@RequestBody @Valid AuthenticationRequestModel request) throws Exception{
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         }catch (BadCredentialsException e){
@@ -42,7 +47,6 @@ public class AuthenticationController {
 
         //return JWT as JSON
         AuthenticationResponseModel response= new AuthenticationResponseModel(jwt);
-//        return ResponseEntity.ok(response);
         return response;
     }
 }

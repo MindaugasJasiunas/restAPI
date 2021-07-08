@@ -13,6 +13,7 @@ REST API written in Java using Spring Boot framework & Java Web Token for author
 | PATCH         | /api/v1/users/{publicId} |
 | DELETE        | /api/v1/users/{publicId} |
 | POST          | /authenticate |
+| GET          | /v2/api-docs |
 
 ## Usage
 
@@ -53,6 +54,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvb
 ##
 
 ## API Reference
+
+We can access REST API interactive documentation created with Swagger 2 using endpoint:
+```http
+GET /swagger-ui.html
+```
 
 ### Get all users
 

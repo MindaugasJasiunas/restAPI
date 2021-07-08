@@ -35,6 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/v1/users/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/authenticate").permitAll()
+                .antMatchers("/v2/api-docs","/configuration/**","/swagger*/**","/webjars/**").permitAll() //swagger
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Spring Security, dont manage or create sessions (REST API)
